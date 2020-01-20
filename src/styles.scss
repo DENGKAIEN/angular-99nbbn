@@ -1,0 +1,102 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body .ui-overlaypanel .ui-overlaypanel-content {
+  padding: 0em;
+}
+
+//@import "../node_modules/primeng/resources/themes/nova-light/theme.css";
+//@import "../node_modules/primeng/resources/primeng.min.css";
+@import url("../node_modules/primeicons/primeicons.css");
+@import url("../node_modules/primeng/resources/themes/nova-light/theme.css");
+@import url("../node_modules/primeng/resources/primeng.min.css");
+thead {
+  background-color: #eee;
+}
+
+[mandatory]:after {
+  content: " *";
+  color: red;
+}
+
+label {
+  font-weight: normal;
+}
+
+.btn-wrap {
+  white-space: normal;
+  line-height: 15px;
+  padding: 2px 8px 2px 8px;
+}
+
+.btn-mat-wrap{
+    vertical-align: middle;
+    line-height: 16px;
+    padding-bottom: 1.5px;
+    padding-top: 1.5px;
+    margin-right: 20px;
+}
+
+.btn-link-wrap {
+  white-space: normal;
+  line-height: 16px;
+  padding: 0px 20px 0px 0px;
+  text-align: left;
+}
+
+.br:before {
+  content: "\A";
+  white-space: pre-line;
+}
+
+.ui-steps .ui-steps-item {
+  width: 16.6%;
+}
+
+.ui-steps.steps-custom {
+  margin-bottom: 30px;
+}
+
+.ui-steps.steps-custom .ui-steps-item .ui-menuitem-link {
+  height: 10px;
+  padding: 0 1em;
+}
+
+.ui-steps.steps-custom .ui-steps-item .ui-steps-number {
+  background-color: #0081c2;
+  color: #FFFFFF;
+  display: inline-block;
+  width: 36px;
+  border-radius: 50%;
+  margin-top: -14px;
+  margin-bottom: 10px;
+}
+
+.ui-steps.steps-custom .ui-steps-item .ui-steps-title {
+  color: #555555;
+}
+
+[blue]{
+  background-color: #3D8BCD;color:white
+}
+
+// body .ui-steps:after {
+//   content: " ";
+//   border-top: 4px solid #7EA6E0;
+//   width: 100%;
+//   top: 45%;
+//   left: 0;
+//   display: block;
+//   position: absolute;
+// }
+
+.menu-link{
+  text-decoration:none;
+  cursor:pointer;
+  color: #777; 
+}
+
+.menu-link:hover{
+  color:black
+}
