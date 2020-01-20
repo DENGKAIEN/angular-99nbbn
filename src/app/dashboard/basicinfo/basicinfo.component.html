@@ -1,0 +1,255 @@
+<form [formGroup]="basicInfo" (ngSubmit)="next()">
+    <div class="panel-body">
+        <div class='row form-group'>
+            <div class='col-lg-12'>
+                <b>Order Information</b>
+            </div>
+        </div>
+        <div class='row form-group'>
+            <div class='col-lg-4'>
+                <div class="text-muted">Order No</div>
+                <input class="form-control" formControlName="orderNo" readonly="readonly">
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted">Order Nature</div>
+                <input class="form-control" formControlName="orderNature">
+            </div>
+        </div>
+
+        <div class='row form-group'>
+            <div class='col-lg-12'>
+                <b>KYC</b>
+            </div>
+        </div>
+
+        <div class='row form-group'>
+            <div class='col-lg-3'>
+                <div class='col-lg-6'>
+                    <label class="radio-inline">
+                        <input type="radio" name="usage" value="individual" checked formControlName="usage"> Individual
+                    </label>
+                </div>
+                <div class='col-lg-6'>
+                    <label class="radio-inline">
+                        <input type="radio" name="usage" value="commercial" formControlName="usage"> Commercial
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class='row form-group'>
+            <div class='col-lg-4'>
+                <div class="text-muted">Document Type</div>
+                <select class="form-control" formControlName="documentType">
+                    <option value=''>Pls Select</option>
+                    <option value='HKID'>HKID</option>
+                    <option value='Travel'>Travel</option>
+                    <option value='Birth'>Birth</option>
+                </select>
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted">Document No.</div>
+                <input class="form-control" formControlName="documentNum">
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted">Customer Name</div>
+                <input class="form-control" formControlName="customerName">
+            </div>
+        </div>
+
+        <div class='row form-group'>
+            <div class='col-lg-4'>
+                <div class="text-muted">Contact Mobile No.</div>
+                <select class="form-control" style="display: inline;width: 18%" formControlName="prefix">
+                    <option value='852'>852</option>
+                    <option value='853'>853</option>
+                    <option value='86'>86</option>
+                    <option value='81'>81</option>
+                </select>
+                <input class="form-control" style="margin-left:5px;display: inline;width: 80.5%" formControlName="num">
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted">Contact Fixed Line No.</div>
+                <input class="form-control" formControlName="contactFixedLineNum">
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted">Contact Email Address</div>
+                <input class="form-control" formControlName="contactEmailAddress">
+            </div>
+        </div>
+
+        <div class='row form-group'>
+            <div class='col-lg-4'>
+                <div class="text-muted">Club Membership ID</div>
+                <input class="form-control" formControlName="clubMembershipId">
+            </div>
+            <div class='col-lg-4 br'>
+                <button type="button" class="btn btn-default btn-wrap">
+                    Search<br>customer
+                </button>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <b>Matched Customer Information</b>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="15%">Document Type</th>
+                            <th width="15%">Document No.</th>
+                            <th width="20%">Customer Name</th>
+                            <th width="15%">Contact Mobile No.</th>
+                            <th width="35%">Contact Email Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i of [1,2,3]">
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-lg-12'>
+                <b>Sales Engagement History</b>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="15%">Channel</th>
+                            <th width="15%">Sales Nature</th>
+                            <th width="25%">Engagement Response</th>
+                            <th width="35%">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i of [1,2,3]">
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class='row form-group'>
+            <div class='col-lg-12'>
+                <b>Product(s) of interested</b>
+            </div>
+        </div>
+        <div class='row form-group'>
+            <div class='col-lg-2'>
+                <div class="text-muted">Product Line(s) Interested</div>
+                <select class="form-control" formControlName="documentType">
+                    <option value=''>Pls Select</option>
+                    <option value='1'>Mobile</option>
+                </select>
+            </div>
+            <div class='col-lg-2'>
+                <div class="text-muted">Vas(s) Interested</div>
+                <select class="form-control" formControlName="documentType">
+                    <option value=''>Pls Select</option>
+                    <option value='1'>Mobile</option>
+                </select>
+            </div>
+            <div class='col-lg-2 br'>
+                <button type="button" class="btn btn-default btn-wrap">
+                    Search<br>Details
+                </button>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-lg-12'>
+                <b>Product Information</b>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="15%">Product Name</th>
+                            <th width="15%">Official Site</th>
+                            <th>KB</th>
+                            <th width="35%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i of [1,2]">
+                            <td>PostPaid Sim Plan</td>
+                            <td>http://...</td>
+                            <td>http://...</td>
+                            <td>
+                                <button type="button" class="btn btn-link btn-link-wrap">
+                                    Share to<br>customer
+                                </button>
+                                <button type="button" class="btn btn-link btn-link-wrap">
+                                    Create<br>Opportunity
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class='row form-group'>
+            <div class='col-lg-12'>
+                <b>Sales Information</b>
+            </div>
+        </div>
+
+        <div class='row form-group'>
+            <div class='col-lg-4'>
+                <div class="text-muted">Staff No.</div>
+                <input class="form-control" formControlName="staffNum">
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted">Staff Name</div>
+                <input class="form-control" formControlName="staffName">
+            </div>
+        </div>
+
+        <div class='row form-group'>
+            <div class='col-lg-4'>
+                <div class="text-muted">Contact No.</div>
+                <input class="form-control" formControlName="contactNum">
+            </div>
+        </div>
+
+        <div class='row form-group'>
+            <div class='col-lg-4'>
+                <div class="text-muted">Referrer</div>
+                <input class="form-control" formControlName="referrer">
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted">Referrer Name</div>
+                <input class="form-control" formControlName="referrerName">
+            </div>
+        </div>
+        <div class="row">
+            <div class='col-lg-11'></div>
+            <div class='col-lg-1'>
+                <button type="submit" class="btn btn-primary" (click)="next()">Next</button>
+            </div>
+        </div>
+    </div>
+</form>

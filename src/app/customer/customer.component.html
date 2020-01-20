@@ -1,0 +1,43 @@
+<div >
+    <div>
+    <input style='width:240px;height:40px;margin-left: 120px' />
+    
+        <img [src]="pic.fixtag" style='width:40px;height:40px;margin-left: 18px' width="40px" height="40px"/>
+        
+        <img [src]="pic.shopping_cart" style='width:40px;height:40px;margin-left: 18px' width="40px" height="40px" >
+    </div>
+</div>
+<br>
+<div class="panel-body">
+
+    <div>
+            <img [src]="pic.csl" />           
+            <img [src]="pic.blockIcon" style="margin-right: 0ex;" >
+        </div>
+        <br><br>
+    <div class='row col-lg-11 col-md-12'>
+       
+        <div class='col-lg-9 col-md-8 col-sm-8 col-xs-12' *ngIf='this.isvas!="Y"'>
+            <div class='row'>
+                <div class='row col-lg-8'>
+                    2 Recommended Offers for you  
+                </div>
+                <br>
+                <br>
+                <div class='row'>
+                    <div class='col-lg-3 col-md-4 col-xs-6' *ngFor='let r of recom'>
+                        <app-recommended-offers [product]="r" (addToCart)="addToCart($event)"></app-recommended-offers>
+                    </div>
+                </div>
+            </div>          
+        </div>
+        <div class='col-lg-3 col-md-3 col-sm-4 col-xs-6' >
+            <app-filter-selection (search)="search($event)" [categoryForCustomer]="categoryForCustomer"></app-filter-selection>
+        </div>
+    </div>
+
+</div>
+
+
+
+    

@@ -1,0 +1,94 @@
+
+<img [src]="pic.shopping_cart" style='width:40px;height:40px;margin-left: 18px' width="40px" height="40px" (click)="op1.toggle($event);getUpfrontTotal()">
+<app-bubble [text]="this.shoppingCartService.getCount()"></app-bubble>
+<p-overlayPanel #op1 styleClass="padding-0" [style]="{'width':'700px'}">
+    <mat-card style="border-radius:0px">
+    </mat-card>
+    <mat-card style="border-radius:0px" *ngFor="let sub of shoppingCartService.subscribers">
+        <div class="row">
+            <div class="col-lg-7">
+                <b *ngIf="!sub.product.isMup">({{sub.subscribers[0].desc}}) {{sub.subscribers[0].value}}</b>
+                <b *ngIf="sub.product.isMup">({{sub.groupDesc}}) {{sub.groupName}}</b>
+            </div>
+            <div class="col-lg-5" style="text-align:right">
+                <img [src]="pic.group" *ngIf="sub.product.isMup" (click)="config(sub.id,'group');op1.hide()"
+                    class="btn-cart">
+                <img [src]="pic.config" (click)="config(sub.id);op1.hide()" class="btn-cart">
+                <img [src]="pic.vas" (click)="vas(sub.id);op1.hide()" class="btn-cart">
+                <img [src]="pic.gift" class="btn-cart">
+                <img [src]="pic.remove" (click)="remove(sub.id)" class="btn-cart">
+                <img [src]="pic.change" class="btn-cart">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12" style="margin-left:10px">
+                <div>{{sub.product.detail.name}}{{' ('+sub.product.config?.color+')'}}</div>
+                <div>{{sub.product.plan.name}} {{sub.product.plan.localData+'GB Local Data'}}</div>
+            </div>
+        </div>
+        <div *ngIf="sub.vas!=undefined">
+            <mat-card style="padding-top:5px;padding-bottom:0px;box-shadow: none;border-radius:0px" *ngFor="let vas of sub.vas">
+                <div class="row">
+                    <div class="col-lg-7" style="margin-top:10px">
+                        <div>{{vas.plan.name}} {{vas.plan.localData?vas.plan.localData+'G':''}}</div>
+                    </div>
+                    <div class="col-lg-5" style="text-align:right">        
+                        <img [src]="pic.remove" (click)="removeVas(vas.id)"
+                            class="btn-cart">
+                        <img [src]="pic.change" class="btn-cart">
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div *ngIf="sub.product.isMup">
+            <mat-card style="padding-top:5px;padding-bottom:0px;box-shadow: none;border-radius:0px"
+                *ngFor="let gs of sub.subscribers">
+                <div class="row">
+                    <div class="col-lg-7" style="margin-top:10px">
+                        <b>({{gs.desc}}) {{gs.value}}</b>
+                    </div>
+                    <div class="col-lg-5" style="text-align:right">
+                        <img [src]="pic.config" (click)="config(sub.id,undefined,gs.id);op1.hide()"
+                            class="btn-cart">
+                        <img [src]="pic.vas" (click)="vas(gs.id);op1.hide()" class="btn-cart">
+                        <img [src]="pic.remove" (click)="removeGroupSubscriber(sub.id,gs.id)"
+                            class="btn-cart">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>MUP SIM Offer</div>
+                    </div>
+                </div>
+                <div *ngIf="gs.vas!=undefined">
+                        <mat-card style="padding-top:5px;padding-bottom:0px;box-shadow: none;border-radius:0px" *ngFor="let vas of gs.vas">
+                            <div class="row">
+                                <div class="col-lg-7" style="margin-top:10px">
+                                        <div>{{vas.plan.name}} {{vas.plan.localData?vas.plan.localData+'G':''}}</div>
+                                </div>
+                                <div class="col-lg-5" style="text-align:right">        
+                                    <img [src]="pic.remove" (click)="removeVas(vas.id)"
+                                        class="btn-cart">
+                                    <img [src]="pic.change" class="btn-cart">
+                                </div>
+                            </div>
+                        </mat-card>
+                        <br>
+                    </div>
+            </mat-card>
+            <br>
+        </div>
+    </mat-card>
+    <mat-card style="border-radius:0px">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>Upfront Total: {{shoppingCartService.upfrontTotalDetail}} = ${{shoppingCartService.upfrontTotalSum}}</div>
+                <div>Clubpoint Required: <img [src]="pic.point" width="20px" height="20px" /> {{shoppingCartService.clubpointRequired}}</div>
+                <div>Total Monthly Rate: {{shoppingCartService.totalMonthlyRate}}</div>               
+            </div>
+        </div>
+        <div class="row" style="text-align:right">
+            <button class="btn btn-primary" style="margin-right:12px" (click)="checkout();op1.hide()">Check out</button>
+        </div>
+    </mat-card>
+</p-overlayPanel>

@@ -1,0 +1,33 @@
+<div class='row'>
+    <div class='col-lg-12' style='text-align:right'>
+        <a class="menu-link" [mat-dialog-close]="returnResponse()">X</a>
+    </div>
+</div>
+<div class='row'>
+    <br>
+    <div class='col-lg-12'>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Order Nature</th>
+                    <th>Touched Offer</th>
+                    <th>Engagement Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of engagementResponse;let i=index">
+                    <td>{{e.orderNature}}</td>
+                    <td>{{e.touchedOffer}}</td>
+                    <td>
+                        <label class="radio-inline">
+                            <input type="radio" name="response{{i}}" value="no" [(ngModel)]='e.engagementResponse'> No Interset
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="response{{i}}" value="later" [(ngModel)]='e.engagementResponse'> Consider later
+                        </label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

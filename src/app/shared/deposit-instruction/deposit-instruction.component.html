@@ -1,0 +1,137 @@
+<div class="row">
+    <div class='col-lg-3'>Upfront Total: </div>
+    <div class='col-lg-9'>{{shoppingCartService.upfrontTotalDetail}} = ${{shoppingCartService.upfrontTotalSum}}</div>
+</div>
+<div class="row">
+    <div class='col-lg-3'>Deposit:</div>
+    <div class='col-lg-9'>$0</div>
+</div>
+<div class="row">
+
+    <div class='col-lg-3'>Total: </div>
+    <div class='col-lg-9'>${{shoppingCartService.upfrontTotalSum}}</div>
+
+</div>
+<div class="row">
+    <div class='col-lg-3'>Clubpoint Required: </div>
+    <div class='col-lg-9'>{{shoppingCartService.clubpointRequired}}</div>
+</div>
+<div class='row br' style='padding-bottom: 5px'>
+    <div class='col-lg-10'><b>Burn Club Point Instruction</b></div>
+</div>
+<div class="row">
+    <div class='col-lg-12'>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width='10%'>Type</th>
+                    <th width='10%'>Point</th>
+                    <th width='15%'>Club Membership ID</th>
+                    <th width='15%'>The Club account</th>
+                    <th width='10%'>Status</th>
+                    <th width='15%'>Reference</th>
+                    <th width='25%'>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Club Point
+                    </td>
+                    <td>500</td>
+                    <td>86564656546</td>
+                    <td>brandawong@gmail.com</td>
+                    <td>Pending</td>
+                    <td></td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-link-wrap">
+                            Burn
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class='row br' style='padding-bottom: 5px'>
+    <div class='col-lg-10'><b>Upfront Payment / Deposit Instruction</b></div>
+    <div class='col-lg-2'>
+        <button mat-stroked-button (click)="add()" class='pull-right'>Add</button>
+    </div>
+</div>
+<div class="row">
+    <div class='col-lg-12'>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width='20%'>Type</th>
+                    <th width='10%'>Charge Amt</th>
+                    <th width='15%'>Card Number</th>
+                    <th width='15%'>Status</th>
+                    <th width='15%'>Reference</th>
+                    <th width='25%'>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ins of instructions;let i=index">
+                    <td>
+                        {{ins.type}}
+                    </td>
+                    <td>{{ins.amount}}</td>
+                    <td>{{ins.cardNum}}</td>
+                    <td>{{ins.status}}</td>
+                    <td></td>
+                    <td>
+                        <ng-container *ngIf="ins.status=='Pending to pay'">
+                            <ng-container *ngIf="ins.type!='Tap & Go'">
+                                <button (click)='edit(ins,i)' type="button" class="btn btn-link btn-link-wrap">
+                                    Edit
+                                </button>
+                                <button (click)='remove(i)' type="button" class="btn btn-link btn-link-wrap">
+                                    Remove
+                                </button>
+                                <button *ngIf="ins.type!='Cash'" (click)="ins.status='Paid Successfully'" type="button"
+                                    class="btn btn-link btn-link-wrap">
+                                    Pay Now
+                                </button>
+                                <button (click)="ins.status='Paid Successfully'" *ngIf="ins.type=='Cash'" type="button"
+                                    class="btn btn-link btn-link-wrap">
+                                    Paid
+                                </button>
+                            </ng-container>
+                            <ng-container *ngIf="ins.type=='Tap & Go'">
+                                <button type="button" class="btn btn-link btn-link-wrap">
+                                    Remove
+                                </button>
+                                <button type="button" class="btn btn-link btn-link-wrap">
+                                    Generate<br>QR code
+                                </button>
+                                <button type="button" class="btn btn-link btn-link-wrap"
+                                    (click)="ins.status='Paid Successfully'">
+                                    Check<br>Result
+                                </button>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="ins.status=='Paid Successfully'">
+                            <ng-container *ngIf="ins.type!='Tap & Go'">
+                                <button *ngIf="ins.type!='Cash'" type="button" class="btn btn-link btn-link-wrap">
+                                    Void
+                                </button>
+                            </ng-container>
+                        </ng-container>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class='row pull-right br'>
+    <div class='col-lg-12 '>
+        <button mat-stroked-button style='vertical-align: middle;
+            line-height: 16px;
+            padding-bottom: 1.5px;
+            padding-top: 1.5px;
+            margin-right: 20px;'>Sales<br>memo</button>
+        <button mat-stroked-button blue [mat-dialog-close]="">Next</button>
+    </div>
+</div>

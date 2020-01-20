@@ -1,0 +1,65 @@
+<div class='row'>
+    <div class='col-lg-4'>
+        <div class='text-muted'>Amount</div>
+        <input class='form-control' [(ngModel)]='detail.amount'>
+    </div>
+    <div class='col-lg-4'>
+        <div class='text-muted'>Type</div>
+        <select class="form-control" [(ngModel)]='detail.type'>
+            <option value='Cash'>Cash</option>
+            <option value='Credit Card'>Credit Card</option>
+            <option value='Credit Card Installment'>Credit Card Installment</option>
+            <option value='Tap & Go'>Tap & Go</option>
+        </select>
+    </div>
+    <div class='col-lg-4' *ngIf="detail.type=='Credit Card Installment'">
+        <div class='text-muted'>Installment Period</div>
+        <select class="form-control" [(ngModel)]='detail.period'>
+            <option value='12'>12 Months</option>
+            <option value='24'>24 Months</option>
+        </select>
+    </div>
+</div>
+<div *ngIf="detail.type!='Tap & Go'&&detail.type!='Cash'">
+    <div class='row br'>
+        <div class='col-lg-12'><label class='checkbox-inline'><input type="checkbox" [(ngModel)]='detail.isSameCard'>Same Credit Card inputted in Payment Method</label></div>
+    </div>
+    <div class='row br'>
+        <div class='col-lg-3'>
+            <div class='text-muted' mandatory>Card Holder Name</div>
+            <input class='form-control' [(ngModel)]='detail.name'>
+        </div>
+        <div class='col-lg-4'>
+            <div class='text-muted' mandatory>Card Holder Document Type </div>
+            <select class="form-control" [(ngModel)]='detail.docType'>
+                <option value='HKID'>HKID</option>
+                <option value='Travel'>Travel</option>
+                <option value='Birth'>Birth</option>
+            </select>
+        </div>
+        <div class='col-lg-4'>
+            <div class='text-muted' mandatory>Card Holder Document No. </div>
+            <input class='form-control' [(ngModel)]='detail.docNum'>
+        </div>
+    </div>
+    <div class='row br'>
+        <div class='col-lg-4'>
+            <div class='text-muted' mandatory>Credit Card Type</div>
+            <select class="form-control" [(ngModel)]='detail.cardType'>
+                <option value='VISA'>VISA</option>
+                <option value='Master'>Master</option>
+            </select>
+        </div>
+        <div class='col-lg-4'>
+            <div class='text-muted' mandatory>Credit Card No. </div>
+            <input class='form-control' [(ngModel)]='detail.cardNum'>
+        </div>
+    </div>
+
+</div>
+<div class='row br pull-right'>
+    <div class='col-lg-12 '>
+        <button mat-stroked-button [mat-dialog-close]="null" style='margin-right: 15px'>Cancel</button>
+        <button mat-stroked-button blue [mat-dialog-close]="save()">Save</button>
+    </div>
+</div>

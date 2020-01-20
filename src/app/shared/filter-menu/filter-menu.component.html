@@ -1,0 +1,16 @@
+<div *ngIf="criteria.length!=0">
+    <div class='text-muted'>
+        Selected by
+    </div>
+    <br>
+    <div *ngFor="let c of criteria"><a class="menu-link" (click)="removeSearchCriteria(c)">X</a>&nbsp;<b>{{c.head.label}}</b>: <font class="text-muted">{{c.item.label}}</font></div>
+    <br>
+</div>
+<div>
+    Filter By
+</div>
+<br>
+<div *ngFor="let categorie of categories">
+    <app-expansion-menu *ngIf="categorie.isShow" (choose)="addSearchCriteria($event)" [category]="categorie">
+    </app-expansion-menu>
+</div>

@@ -1,0 +1,90 @@
+<div mat-dialog-content class="panel-body" style='max-height: none'>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12" style='padding-top:20px'>
+            <app-product [product]="product" [showBtn]="false"></app-product>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12" style='padding-left:25px'>
+            <div class="row br" *ngIf='!product.plan.isDiy'>
+                <div class="col-lg-3">
+                    <span>Contract Period</span>
+                </div>
+                <div class="col-lg-9">
+                    <p-dropdown [(ngModel)]="contractPeriod" [options]="contractPeriodList" [style]="{'width':'100%'}"
+                        (onChange)='setPrice($event.value)'>
+                    </p-dropdown>
+                </div>
+            </div>
+            
+            <div class="row br">
+                <div class="col-lg-3">
+                    <span>Internal Storage</span>
+                </div>
+                <div class="col-lg-9">
+                    <p-dropdown [(ngModel)]="internalStorage" [options]="internalStorageList" [style]="{'width':'100%'}">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="row br">
+                <div class="col-lg-3">
+                    <span>Color</span>
+                </div>
+                <div class="col-lg-9">
+                    <p-dropdown [(ngModel)]="color" [options]="colorList" [style]="{'width':'100%'}"></p-dropdown>
+                </div>
+            </div>
+            <ng-container *ngIf='product.plan.isDiy'>
+                <div class="row br">
+                    <div class="col-lg-3">
+                        <span>Contract Period</span>
+                    </div>
+                    <div class="col-lg-3">
+                        <span>{{contractPeriod}}M</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 br" style='padding-left: 23px'>
+                        <p-slider [(ngModel)]="contractPeriod" [min]="1" [max]="24" [style]="{'width':'100%'}"
+                            (onChange)='setPrice($event.value)'></p-slider>
+                    </div>
+                </div>
+                <div class="row br">
+                    <div class="col-lg-3">
+                        <span>Local Data Entitlement</span>
+                    </div>
+                    <div class="col-lg-3">
+                        <span>{{localData}}GB</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 br" style='padding-left: 23px'>
+                        <p-slider [(ngModel)]="localData" [min]="1" [max]="20" [style]="{'width':'100%'}"></p-slider>
+                    </div>
+                </div>
+                <div class="row br">
+                    <div class="col-lg-3">
+                        <span>Unlimited Daily Data Usage between</span>
+                    </div>
+                    <div class="col-lg-9 pull-right">
+                        <p-calendar [(ngModel)]="dateStart" [timeOnly]="true"></p-calendar>
+                        ——
+                        <p-calendar [(ngModel)]="dateEnd" [timeOnly]="true"></p-calendar>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="row">
+                <div class="col-lg-12 br">
+                    <img [src]="pic.point" width="20px" height="20px" />114.9 Clubpoints wiil be earned
+                </div>
+            </div>
+            <div class="row br pull-right">
+                <div class="col-lg-12" >
+                    <button style='margin-right:15px' mat-stroked-button [value]="false" (click)='couponUsed=!couponUsed'>
+                        {{couponUsed?'Conpon Used':'Use My Coupon'}}
+                    </button>
+                    <button blue mat-stroked-button
+                        [mat-dialog-close]="product" (click)="updateProduct()">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,396 @@
+<div class="panel-body">
+    <div class='row col-lg-12'>
+        Service Instance
+    </div>
+    <div class='row' *ngIf="this.configType=='group'">
+        <div class='col-lg-3'>
+            <!-- <p-multiSelect [options]="cars" [style]="{width:'300px'}" [showHeader]="false"></p-multiSelect> -->
+            <input class="form-control" [(ngModel)]="this.su.groupName" />
+        </div>
+    </div>
+    <div class='row' *ngIf="this.configType!='group'">
+        <div class='col-lg-3'>
+            <!-- <p-multiSelect [options]="cars" [style]="{width:'300px'}" [showHeader]="false"></p-multiSelect> -->
+            <select class="form-control" (change)="changeServiceInstance($event)" [value]="serviceInstance.id">
+                <option *ngFor="let si of su.subscribers" [value]="si.id">{{'('+si.desc+') '+si.value}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="br"></div>
+    <div class="br"></div>
+    <div class="br"></div>
+    <div class='row col-lg-12'>
+        <b>
+            <div>{{su.product.detail.name}}{{' ('+su.product.config?.color+')'}}</div>
+            <div>{{su.product.plan.name}} {{su.product.plan.localData+'GB Local Data'}}</div>
+
+        </b>
+    </div>
+    <div class='row'>
+        <div class='col-lg-12'>
+            <mat-tab-group [selectedIndex]="this.configType=='group'?1:0">
+                <mat-tab label="Sales Configure" [disabled]="this.configType=='group'">
+                    <div class="row col-lg-12 br">
+                        <b>Subscriber Option</b>
+                    </div>
+                    <div class="col-lg-12 br">
+                        <p-checkbox name="group1" value="New York" label="Suppress local mobile data top-up option"
+                            inputId="ny"></p-checkbox>
+                    </div>
+                    <div class="col-lg-12 br">
+                        <p-checkbox name="group1" value="San Francisco"
+                            label="Suppress roaming mobile data top-up option" inputId="sf">
+                        </p-checkbox>
+                    </div>
+                    <div class="col-lg-12 br">
+                        <p-checkbox name="group1" value="Los Angeles" label="Suppress IDD0060 registration option"
+                            inputId="la">
+                        </p-checkbox>
+                    </div>
+                    <div class="row col-lg-12 br">
+                        <b>Local / Roaming Data Alert Setting</b>
+                    </div>
+                    <div class='col-lg-12 row br'>
+                        <div class="col-lg-4">
+                            <div class="text-muted">Alert Type</div>
+                            <select class="form-control">
+                                <option>SMS and Email</option>
+                                <option>SMS only</option>
+                                <option>Email only</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12 br">
+                        <div class='col-lg-4'>
+                            <div class="text-muted">Email Address</div>
+                            <input class="form-control">
+                        </div>
+                        <div class='col-lg-4 br'>
+
+                            <p-checkbox name="group1" value="Los Angeles" label="Same as Email Billing Address"
+                                inputId="la">
+                            </p-checkbox>
+                        </div>
+                    </div>
+
+                    <div class="row col-lg-12 br">
+                        <div class='col-lg-4'>
+                            <div class="text-muted">SMS Alert Recipient</div>
+                            <select class="form-control">
+                                <option>Original Mobile Number Only</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class='col-lg-4'>
+                            <div class="text-muted">2nd Mobile Number</div>
+                            <input class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row col-lg-12" style="margin-bottom:10px">
+                        <div class="col-lg-12 br">
+                            <p-checkbox name="group1" value="New York"
+                                label="Customer opt-out 1st data roaming usage reminder SMS" inputId="ny"></p-checkbox>
+                        </div>
+                        <div class="col-lg-12 br">
+                            <p-checkbox name="group1" value="San Francisco"
+                                label="Customer opt-out data roaming high usage alert SMS" inputId="sf">
+                            </p-checkbox>
+                        </div>
+
+                    </div>
+                </mat-tab>
+                <mat-tab label="Fulfillment Configure">
+                    <ng-container *ngIf="this.configType=='group'">
+                        <div class="text-muted br">Send Top Up Alert to</div>
+                        <div class='row col-lg-3'>
+                            <select class="form-control">
+                                <option value="1">Primary+Members</option>
+                                <option value="2">Other</option>
+                            </select>
+                        </div>
+                        <div class='row col-lg-9'><label></label></div>
+                    </ng-container>
+
+                    <ng-container *ngIf="this.configType!='group'">
+                        <div class='row col-lg-12 br'>
+                            <div class="col-lg-4">
+                                <p-checkbox name="changeownership" value="changeownership" label="Primary Indicator"
+                                    inputId="changeownership"></p-checkbox>
+                            </div>
+                        </div>
+                        <div class='row col-lg-12 br'>
+                            <div class='col-lg-3'>
+                                <label><input type="radio" value="nmn" name="numType" [(ngModel)]="numType"> New Mobile
+                                    Number</label>
+                            </div>
+                            <div class='col-lg-2'>
+                                <label><input type="radio" value="mnp" name="numType" [(ngModel)]="numType"> MNP</label>
+                            </div>
+                            <div class='col-lg-3'>
+                                <label><input type="radio" value="emn" name="numType" [(ngModel)]="numType"> Existing
+                                    Mobile
+                                    Number</label>
+                            </div>
+                        </div>
+                        <ng-container #NMN *ngIf="numType=='nmn'">
+                            <div class='row col-lg-12 br'>
+                                <div class='col-lg-3'>
+                                    <div class='text-muted'>Service Request date</div>
+                                    <select class="form-control">
+                                        <option *ngFor='let item of [].constructor(5); let i = index'
+                                            value="{{(today-60*60*24*1000*i)|date: 'ddMMyyyy'}}">
+                                            {{(today-60*60*24*1000*i)|date: 'dd MMM yyyy'}}</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class='row col-lg-12 br'>
+                                <div class='col-lg-12'><b>Number Information</b></div>
+
+                            </div>
+                            <div class='row col-lg-12 br'>
+                                <div class='col-lg-2'>
+                                    <button type="button" class="btn btn-default btn-wrap" (click)="openDialog()">
+                                        Select<br>Number
+                                    </button>
+                                </div>
+                                <div class='col-lg-2'>
+                                    <label><input type="checkbox" value="afterwards" name="afterwards">MNP
+                                        afterwards</label>
+                                </div>
+                            </div>
+
+                        </ng-container>
+                        <ng-container #MNP *ngIf="numType=='mnp'">
+                            <div class="row col-lg-12 br">
+                                <div class="col-lg-4">
+                                    <div class="text-muted">Cut over date</div>
+                                    <select class="form-control">
+                                        <option *ngFor='let item of [].constructor(5); let i = index'
+                                            value="{{(today-60*60*24*1000*i)|date: 'ddMMyyyy'}}">
+                                            {{(today+60*60*24*1000*i)|date: 'dd MMM yyyy'}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">Cut over time</div>
+                                    <select class="form-control">
+                                        <option value="1200-1400">
+                                            12:00 - 14:00</option>
+                                        <option value="1400-1600">
+                                            14:00 - 16:00</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row col-lg-12 br">
+                                <div class='col-lg-12'><b>Number Information</b></div>
+                            </div>
+
+                            <div class='row col-lg-12 br'>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">Number to transfer</div>
+                                    <input class="form-control" [(ngModel)]='serviceInstance.value' type="text">
+
+                                </div>
+                                <div class="col-lg-1">
+                                    <div class="text-muted">&nbsp;</div>
+                                    <button class="btn btn-default">Check</button>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">Ticket No.</div>
+                                    <input class="form-control" type="text" value="124432" disabled>
+                                </div>
+                            </div>
+
+                            <div class='row col-lg-12 br'>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">
+                                        Old Customer Name
+                                        <label style="margin-bottom:0px" class='pull-right'><input type="checkbox"
+                                                value="PrepaidSIM" name="afterwards">Prepaid SIM</label>
+                                    </div>
+                                    <input class="form-control" type="text" value='WONG TAI YAN BRENDA'>
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">Old Customer Document No / Prepaid SIM No.</div>
+                                    <input class="form-control" type="text" value='Z123XXX(2)'>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container #MNP *ngIf="numType=='emn'">
+                            <div class="row col-lg-12 br">
+                                <div class="col-lg-4">
+                                    <div class="text-muted">Service Request date</div>
+                                    <select class="form-control">
+                                        <option *ngFor='let item of [].constructor(5); let i = index'
+                                            value="{{(today-60*60*24*1000*i)|date: 'ddMMyyyy'}}">
+                                            {{(today-60*60*24*1000*i)|date: 'dd MMM yyyy'}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='row col-lg-12 br'>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">Existing Mobile Number</div>
+                                    <input class="form-control" [(ngModel)]='serviceInstance.value' type="text">
+
+                                </div>
+                                <div class="col-lg-1">
+                                    <div class="text-muted">&nbsp;</div>
+                                    <button class="btn btn-default" 
+                                    (click)="ecn.value='MR KWONG KA HO';edt.value='HKID';edn.value='R123456(7)';esi.value='8985200013735926698 / C-SIM';mg.value=''">Search</button>
+                                </div>
+                            </div>
+
+                            <div class='row col-lg-12 br'>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">
+                                        Existing Customer Name
+                                    </div>
+                                    <input #ecn class="form-control" type="text" disabled>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">
+                                        Existing Doc Type
+                                    </div>
+                                    <input #edt class="form-control" type="text" disabled>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">
+                                        Existing Doc No.
+                                    </div>
+                                    <input #edn class="form-control" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class='row col-lg-12 br'>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">
+                                        Existing SIM Info.
+                                    </div>
+                                    <input #esi class="form-control" type="text" disabled>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="text-muted">
+                                        MUP Group
+                                    </div>
+                                    <input #mg class="form-control" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class='row col-lg-12 br'>
+                                <div class="col-lg-4">
+                                    <p-checkbox name="changeownership" value="changeownership" label="Change Ownership"
+                                        inputId="changeownership"></p-checkbox>
+                                </div>
+                            </div>
+                            <div class="row br col-lg-12">
+                                <div class='col-lg-12'><b>One Time Charge Information</b></div>
+                            </div>
+                            <div class="row col-lg-12">
+                                <div class='col-lg-12'>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Charge Type</th>
+                                                <th>Charge Amt</th>
+                                                <th>Waive<br>Indicator</th>
+                                                <th>Waive Reason</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let i of [].constructor(1)">
+                                                <td width="25%">
+                                                    Transfer of Ownership Admin Charge
+                                                </td>
+                                                <td width="15%">$100</td>
+                                                <td width="10%">No</td>
+                                                <td></td>
+                                                <td><a>Edit</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row br col-lg-12">
+                                <div class='col-lg-12'><b>Penalty Information</b></div>
+                            </div>
+                            <div class="row col-lg-12">
+                                <div class='col-lg-12'>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Offer Name</th>
+                                                <th>Penalty Amt</th>
+                                                <th>Remaining Month</th>
+                                                <th>Waive Indicator</th>
+                                                <th>Waive Reason</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let i of [].constructor(1)">
+                                                <td width="25%">
+                                                    Ultra Speed Service Plan 8GB
+                                                </td>
+                                                <td width="15%">$1980</td>
+                                                <td width="10%">10</td>
+                                                <td>No</td>
+                                                <td></td>
+                                                <td><a>Edit</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class='row col-lg-12 br'>
+                                <div class="col-lg-4">
+                                    <p-checkbox name="changeownership" value="changeownership" label="Change SIM"
+                                        inputId="changeownership"></p-checkbox>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="row br col-lg-12">
+                            <div class="col-lg-12"><b>SIM Selection (Handset SIM Slot: Nano)</b></div>
+
+                        </div>
+                        <div class="row col-lg-12">
+                            <div class='col-lg-12'>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>SIM Type</th>
+                                            <th>Charge Amt</th>
+                                            <th>Waive<br>Indicator</th>
+                                            <th>Waive Reason</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let s of sim">
+                                            <td width="25%"><label><input [(ngModel)]='this.serviceInstance.sim.skuCode'
+                                                        type="radio" [value]="s.skuCode" name="simType" (change)='this.serviceInstance.sim.skuCode=s.skuCode;this.serviceInstance.sim.type=s.type'>
+                                                    {{s.type}}</label>
+                                            </td>
+                                            <td width="15%">${{s.chargeAmt}}</td>
+                                            <td width="10%">{{s.waiveIndicator}}</td>
+                                            <td></td>
+                                            <td *ngFor='let action of s.action'><a>{{action}}</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </ng-container>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>
+<div class='row col-lg-12' style="text-align: right">
+    <button class="btn btn-primary" (click)="confirm()">Close</button>
+</div>
+<br>

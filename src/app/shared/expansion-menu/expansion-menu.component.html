@@ -1,0 +1,12 @@
+<mat-accordion>
+    <mat-expansion-panel expanded="ture" style='width:90%'>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{category.head.label}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngFor="let item of category.items"><a class="menu-link"
+                (click)="addSearchCriteria(item)">{{item.label}} {{'('+item.count+')'}}</a></div>
+    </mat-expansion-panel>
+</mat-accordion>
+<br>

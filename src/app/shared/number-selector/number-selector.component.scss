@@ -1,0 +1,17 @@
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 60px;
+}
+
+.num-chosen {
+  font-weight: 800;
+  display: block;
+  text-transform: uppercase;
+  text-align: center;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-origin: content-box;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAnCAYAAACMo1E1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAHUSURBVFhH7Zi/rgFBFIdneQKJQiMEBRqNUiI6L6Kh3UThFZSi2F6j1SioNP5FRC8RvcZqFMw1e8/mBufuzJ61iWK+5JddO2d2vh0nK2HwB+xLicDxK9FyVLQcFS1H5avlQn8J3243ttlsWDQaZaVSyTkqI+TC4nw+83Q6LR7eSSqV4pfLBUblhLpzhmHA2R8PWbbf71kkIu+o0Hqu2+3C2TOHw4Ftt1v4JMHZvxAQt/4vq9UKqrwJRa7RaKBSIvl8nt/vd6j05uNyj35CpdyMx2OolPNxuVqthkqJZLNZqFJDWe50OvH1es2v1ytceWc+n6NSbpbLJVSqoSRnmiaPxWLOAolEgo9GIxh5plwuvwm5qdfrUKWOVK7f76OLzWYzqPhlMpmgdW5s24ZKdaRymUwGXUxkOBxCFX/6JXhNu92GKn9I5eLxOLqgm8ViwQeDATrmhop0ZrPZRBdUTa/Xgzv5R+mxCoUCurAsoiWCoLznyWQSFfDKdDqF2TR8NYQfwUqlArPo+O7WYrGIyrxmt9vBDDq+5QSyHaxWq1AZDJKcwEvweDxCVTDIcgLsK+50OjAanEByglar5byoc7kctywLrn4G/RcYFS1HRctR0XI0GPsBfF2ApOJAcxYAAAAASUVORK5CYII=');
+  cursor: pointer;
+  outline: none;
+}

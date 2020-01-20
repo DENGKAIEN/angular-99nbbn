@@ -1,0 +1,369 @@
+<div class="panel-body">
+    <div class='row'>
+        <div class='col-lg-12'>
+            <b>Resource Stock Balance</b>
+        </div>
+    </div>
+    <div class='row'>
+        <br>
+        <div class='col-lg-12'>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Resource Type</th>
+                        <th>Resource Name</th>
+                        <th>SKU Code</th>
+                        <th>SKU Name</th>
+                        <th>Available Stock Qty</th>
+                        <th>Required Stock Qty</th>
+                        <th *ngIf="pickup=='upfront'||pickup=='shop'">Advanced Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of phyResources;let i=index">
+                        <td>{{p.resourceType}}</td>
+                        <td>{{p.resourceName}}</td>
+                        <td>{{p.skuCode}}</td>
+                        <td>{{p.skuName}}</td>
+                        <td>{{p.avaQty}}</td>
+                        <td>{{p.qty}}</td>
+                        <td *ngIf="pickup=='upfront'||pickup=='shop'">
+                            <input type="checkbox" name="ad{{i}}">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class='row'>
+        <br>
+        <div class='col-lg-2'>
+            <label class="radio-inline">
+                <input type="radio" name="pickup" value="delivery" [(ngModel)]="pickup" checked> Delivery
+            </label>
+        </div>
+        <div class='col-lg-2'>
+            <label class="radio-inline">
+                <input type="radio" name="pickup" value="upfront" [(ngModel)]="pickup"> Upfront Pick up
+            </label>
+        </div>
+        <div class='col-lg-2'>
+            <label class="radio-inline">
+                <input type="radio" name="pickup" value="installation" [(ngModel)]="pickup" disabled> Installation
+            </label>
+        </div>
+        <div class='col-lg-2'>
+            <label class="radio-inline">
+                <input type="radio" name="pickup" value="shop" [(ngModel)]="pickup"> Pick up at Shop
+            </label>
+        </div>
+    </div>
+    <div *ngIf="pickup=='delivery'">
+        <div class='row'>
+            <br><br>
+            <div class='col-lg-12'>
+                <b>Delivery Details</b>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tracking Number</th>
+                            <th>Service No.</th>
+                            <th>Status</th>
+                            <th>SKU Code</th>
+                            <th>SKU Name</th>
+                            <th>ICCID / IMEI</th>
+                            <th>Action</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detail of deliveryDetails">
+                            <td>{{detail.trackingNumber}}</td>
+                            <td>{{detail.serviceNo}}</td>
+                            <td>{{detail.status}}</td>
+                            <td>{{detail.SKUCode}}</td>
+                            <td>{{detail.SKUName}}</td>
+                            <td>{{detail.ICCIDIMEI}}</td>
+                            <td>
+                                <ng-container *ngFor='let action of detail.action'>
+                                    <a>{{action}}</a>
+                                </ng-container>
+                            </td>
+                            <td>{{detail.reason}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <b>Delivery Contact Details</b>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <label class='checkbox-inline'><input type="checkbox" value="afterwards" name="correspondence ">New
+                    Delivery Contact</label>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <button mat-stroked-button style="line-height: 17px;color:white;background-color: #ccc">
+                    Choose from existing<br>delivery contact person
+                </button>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Title</div>
+                <select class="form-control">
+                    <option value=''>Pls Select</option>
+                    <option value='Miss' selected>Miss</option>
+                    <option value='Mrs'>Mrs</option>
+                    <option value='Mr'>Mr</option>
+                </select>
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Family Name</div>
+                <input class="form-control" value='WONG'>
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Given Name</div>
+                <input class="form-control" value='KAY'>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Contact Mobile No.</div>
+                <input class="form-control" value='93443231'>
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted">Second Contact No.</div>
+                <input class="form-control" value='24343424'>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <b>Delivery Address</b>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <label><input type="checkbox" value="afterwards" name="correspondence "> New Delivery Address</label>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <button mat-stroked-button style="line-height: 17px;color:white;background-color: #ccc">
+                    Choose from existing<br>delivery contact person
+                </button>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-2'>
+                <label class="radio-inline">
+                    <input type="radio" name="payment" value="individual" checked> Fixed format
+                </label>
+            </div>
+            <div class='col-lg-2'>
+                <label class="radio-inline">
+                    <input type="radio" name="payment" value="commercial"> Free format
+                </label>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-6'>
+                <div class="text-muted">Quick Search</div>
+                <select class="form-control">
+                    <option value=''></option>
+                </select>
+            </div>
+            <div class='col-lg-2 br'>
+                <button mat-stroked-button style="line-height: 17px">
+                    Search<br>from MAP
+                </button>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Flat</div>
+                <select class="form-control">
+                    <option value=''>Pls Select</option>
+                    <option value='1' selected>F</option>
+                </select>
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Floor</div>
+                <input class="form-control" value='5'>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Block</div>
+                <select class="form-control">
+                    <option value=''>Pls Select</option>
+                    <option value='1' selected>C</option>
+                </select>
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Building</div>
+                <select class="form-control">
+                    <option value=''>Pls Select</option>
+                    <option value='1' selected>Lucky Garden</option>
+                </select>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Street No.</div>
+                <select class="form-control">
+                    <option value=''>Pls Select</option>
+                    <option value='1' selected>333</option>
+                </select>
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Street Name</div>
+                <select class="form-control">
+                    <option value=''>Pls Select</option>
+                    <option value='1' selected>Wealthy Road East</option>
+                </select>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>District</div>
+                <select class="form-control">
+                    <option value=''>Pls Select</option>
+                    <option value='1' selected>Kowloon City</option>
+                </select>
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Area</div>
+                <select class="form-control">
+                    <option value=''>Pls Select</option>
+                    <option value='1' selected>Kowloon</option>
+                </select>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-4'>
+                <label class="checkbox-inline"><input type="checkbox" value="afterwards" name="afterwards">Urgent
+                    Delivery</label>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Delivery Date</div>
+                <p-calendar [(ngModel)]='dateNow' dateFormat='d M yy' inputStyleClass='form-control'
+                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','border-color':'#ccc'}"></p-calendar>
+            </div>
+            <div class='col-lg-4'>
+                <div class="text-muted" mandatory>Delivery Time</div>
+                <select class="form-control">
+                    <option *ngFor='let item of [].constructor(6);let i=index' value=''>
+                        {{(dateTime.getTime()+60*60*2*1000*i)|date: 'HH:mm'}} -
+                        {{(dateTime.getTime()+60*60*2*1000*(i+1))|date: 'HH:mm'}}
+                    </option>
+                </select>
+                <!-- <p-calendar [(ngModel)]='dateTime' [(ngModel)]="dateStart" [timeOnly]="true"
+                    inputStyleClass='form-control' [style]="{'width':'100%'}"
+                    [inputStyle]="{'width':'100%','border-color':'#ccc'}"></p-calendar> -->
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="pickup=='shop'">
+        <br>
+        <div class='row'>
+            <div class='col-lg-4'>
+                <div class="text-muted">Shop Selection</div>
+                <select class="form-control">
+                    <option value=''>Pls Select</option>
+                    <option value='1' selected>MKK</option>
+                </select>
+            </div>
+            <div class='col-lg-5'>
+                <div class="text-muted">Shop Location</div>
+                <input class="form-control" value="Block C, Lucky Garden, Wealthy Street, Mongkok, Kowloon" disabled>
+            </div>
+            <div class='col-lg-2'>
+                <div>&nbsp;</div>
+                <button mat-stroked-button style="line-height: 17px">
+                    Search<br>from MAP
+                </button>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="pickup=='upfront'||pickup=='shop'">
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <b>Pickup Details</b>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+            <div class='col-lg-12'>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Service No.</th>
+                            <th>Status</th>
+                            <th>SKU Code</th>
+                            <th>SKU Name</th>
+                            <th>ICCID / IMEI</th>
+                            <th>Action</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detail of pickupDetails">
+                            <td>{{detail.serviceNo}}</td>
+                            <td>{{detail.status}}</td>
+                            <td>{{detail.SKUCode}}</td>
+                            <td>{{detail.SKUName}}</td>
+                            <td style="padding-top:3px"><input class="form-control" value="{{detail.ICCIDIMEI}}"></td>
+                            <!-- <td>{{detail.ICCIDIMEI}}</td> -->
+                            <td>
+                                <ng-container *ngFor='let action of detail.action'>
+                                    <a>{{action}}</a>
+                                </ng-container>
+                            </td>
+                            <td>{{detail.reason}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+</div>
+<div class="panel-body">
+    <div class='row'>
+        <br>
+        <div class='col-lg-12' style="text-align: right">
+            <button class="btn btn-primary" (click)="next()">Next</button>
+        </div>
+    </div>
+</div>

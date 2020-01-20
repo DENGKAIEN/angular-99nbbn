@@ -1,0 +1,116 @@
+<div class="panel panel-default" style="border-radius: 10px" style="width:198px;height:505px;">
+    <ng-container *ngFor='let tag of product.tags'>
+        <button class="btn btn-xs btn-tag" [style.backgroundColor]='tag.color'>{{tag.value}}</button>
+    </ng-container>
+    <ng-container *ngIf='product.tags?.length==0'>
+        <div class='br'></div>
+    </ng-container>
+
+    <ul class="list-group" style="height:96%;">
+        <div style='height: 28%'>
+            <li class="list-group-item size-12" style='text-align: center'>
+                <img style='max-height: 125px' [attr.src]="product.picture">
+            </li>
+        </div>
+        <div style='height: 9%'>
+            <li class="list-group-item size-12">
+                <b *ngIf='product.info.price!=null'>${{product.info.price}}</b>
+                <b *ngIf='product.info.clubPoint'> + <img [src]="pic.point" width="20px"
+                        height="20px" />{{product.info.clubPoint}}</b>
+            </li>
+            <li class="list-group-item size-12">
+                <b>{{product.info.desc}}</b>
+            </li>
+        </div>
+        <div style='height: 26%'>
+            <li class="list-group-item" style='padding-bottom: 2px'>{{product.detail.name}}</li>
+            <ng-container *ngFor='let desc of product.detail.descs'>
+                <li class="list-group-item" style='padding-bottom: 2px'>{{desc}}</li>
+            </ng-container>
+        </div>
+        <div style='height: 5%'>
+            <li class="list-group-item">
+                <span *ngFor='let start of [].constructor(product.starts)' class="rating-star fill"></span>
+                <span *ngFor='let start of [].constructor(5-product.starts)' class="rating-star"></span>
+            </li>
+        </div>
+        <br>
+        <div style='height: 12%' *ngIf='product.payment?.length < 1'>
+            <ng-container *ngIf='product.plan.isDiy'>
+                <li class="list-group-item pink">
+                    DIY Plan
+                </li>
+                <li class="list-group-item pink size-12" *ngIf='product.plan.price&&product.plan.period'>
+                    HK${{product.plan.price}}/{{product.plan.per}}</li>
+                <li class="list-group-item pink size-12" *ngIf='product.plan.period'>{{product.plan.period}}
+                    {{product.plan.per}}s contract</li>
+            </ng-container>
+            <ng-container *ngIf='!product.plan.isDiy'>
+                <li class="list-group-item pink size-12" *ngIf='product.plan.other'>{{product.plan.other}}</li>
+                <li class="list-group-item discount">
+                    {{product.plan.oriPrice?'HK$'+product.plan.oriPrice:''}}
+                </li>
+                <li class="list-group-item pink size-12" *ngIf='product.plan.price'>
+                    HK${{product.plan.price}}/{{product.plan.per}}</li>
+                <li class="list-group-item pink size-12" *ngIf='product.plan.period'>{{product.plan.period}}
+                    {{product.plan.per}}s contract</li>
+            </ng-container>
+
+        </div>
+        <div style='height: 12%' *ngIf='product.payment?.length > 0'>
+            <ng-container *ngFor='let payment of product.payment'>
+                <ng-container [ngSwitch]='payment.type'>
+                    <li *ngSwitchCase="'point'" class='list-group-item pink'>
+                        <img [src]="pic.point" width="20px" height="20px" />{{payment.clubpoint}}
+                    </li>
+                    <li *ngSwitchCase="'mix'" class='list-group-item pink'>
+                        <img [src]="pic.point" width="20px" height="20px" />{{payment.clubpoint}} + ${{payment.cash}}
+                    </li>
+                    <li *ngSwitchCase="'money'" class='list-group-item pink'>
+                        ${{payment.cash}}
+                    </li>
+                </ng-container>
+            </ng-container>
+        </div>
+        <div style='height: 5%'>
+            <li class="list-group-item" *ngIf="showBtn">
+                <button class="addto" (click)="add()" mat-stroked-button>ADD TO CART</button>
+            </li>
+        </div>
+        <br>
+        <div style='height: 3%'>
+        <li class="list-group-item" style="text-align: center">
+            <a href="#">Details</a>
+        </li></div>
+        <br>
+    </ul>
+    <!-- <ul class="list-group" *ngIf="product.detail.type=='vas'">
+        <li class="list-group-item">&nbsp;</li>
+        <li class="list-group-item">Speed Data Package</li>
+        <li class="list-group-item">&nbsp;</li>
+        <li class="list-group-item">10GB Local Data</li>
+        <li class="list-group-item">&nbsp;</li>
+        <li class="list-group-item">&nbsp;</li>
+        <li class="list-group-item">&nbsp;</li>
+        <li class="list-group-item">&nbsp;</li>
+        <li class="list-group-item">
+            <span class="rating-star"></span>
+            <span class="rating-star"></span>
+            <span class="rating-star"></span>
+            <span class="rating-star"></span>
+            <span class="rating-star"></span>
+        </li>
+        <br>
+        <li class="list-group-item">&nbsp;</li>
+        <li class="list-group-item pink">HK$150/month</li>
+        <li class="list-group-item pink">24 months contract</li>
+        <li class="list-group-item" *ngIf="showBtn">
+            <button class="btn addto" (click)="add()">ADD TO CART</button>
+        </li>
+        <br>
+        <li class="list-group-item" style="text-align: center">
+            <a href="#">Details</a>
+        </li>
+        <br>
+    </ul> -->
+</div>

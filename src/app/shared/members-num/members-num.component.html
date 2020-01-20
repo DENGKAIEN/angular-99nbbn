@@ -1,0 +1,17 @@
+<!-- <div class="row">
+    <div class="col-lg-11">
+        
+    </div>
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-link" (click)="onNoClick()">X</button>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-lg-4">
+        MUP members<input min="{{numOfMembers}}" type="number" min="1" class="form-control" [(ngModel)]="numOfMembers">
+    </div>
+    <div class="col-lg-3">
+        <div><label></label></div>
+        <button class="btn btn-primary" mat-button [mat-dialog-close]="numOfMembers" cdkFocusInitial>Next</button>
+    </div>
+</div>

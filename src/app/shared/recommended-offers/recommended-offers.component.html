@@ -1,0 +1,35 @@
+<div class="panel panel-default"   style="border-radius: 10px" style="width:225px;height:400px;">
+    <ul class="list-group" style="height:96%;">
+        <div style='height: 28%'>
+            <li class="list-group-item size-12" style='text-align: center'>
+                <img style='max-height: 125px' [attr.src]="product.picture">               
+            </li>
+        </div>
+        <br>
+        <br>
+        <div>
+            <div >
+                <img height="40px" width="40px" style="margin-left: 20px;"   [src]="pic.shopcart"/>
+                <p>
+                <li class="list-group-item black size-12" style="text-decoration: line-through;"  *ngIf='product.priceInfo.price&&product.priceInfo.oriPrice'>
+                    HKB${{product.priceInfo.oriPrice}}</li>
+                    <li class="list-group-item black size-12" >
+                        HKB${{product.priceInfo.price}}</li>
+                    </p>
+            </div>
+        </div>
+        <div>
+            <li class="list-group-item" style='padding-bottom: 2px' style="text-align: center">{{product.minutes}}</li>
+            <li class="list-group-item" style='padding-bottom: 2px' style="text-align: center">{{product.name}}</li>
+            <li class="list-group-item" style='padding-bottom: 2px' style="text-align: center">{{product.ultra}}</li>
+            <li class="list-group-item" style='padding-bottom: 2px'style="text-align: center">{{product.upfront}}</li>
+        </div>
+        <br><br>
+        <div style='height: 3%'>
+            <li class="list-group-item" style="text-align: center">
+                <button > detail</button>
+            </li></div>
+
+    </ul>
+   
+</div>
